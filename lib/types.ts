@@ -15,6 +15,8 @@ export interface TLSRequest {
   threat_score: number;
   verdict: "clean" | "suspicious" | "malicious";
   matched_signature?: string;
+  fingerprint_kind?: string;
+  ja4_fingerprint?: string;
 }
 
 export interface FingerprintEntry {
@@ -23,6 +25,8 @@ export interface FingerprintEntry {
   count: number;
   avg_threat_score: number;
   label: string;
+  fingerprint_kind?: string;
+  ja4_fingerprint?: string;
 }
 
 export interface TimeseriesEntry {

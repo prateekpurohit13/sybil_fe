@@ -1,78 +1,108 @@
 import { NextResponse } from "next/server";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204, headers: corsHeaders });
+}
+
 const topCommon = [
   {
-    ja3_hash: "e7d705a3286e19ea42f587b344ee6865",
-    fingerprint: "771,4865-4866-4867-49195-49199,0-23-65281-10-11-35-16-5-13-18-51-45-43-27-17513,29-23-24,0",
-    count: 4231,
+    ja3_hash: "",
+    fingerprint: "t13d1516h2_8daaf6152771_e5627efa2ab1",
+    count: 8234,
+    avg_threat_score: 12,
+    label: "Chrome (Windows)",
+    fingerprint_kind: "ja4",
+    ja4_fingerprint: "t13d1516h2_8daaf6152771_e5627efa2ab1",
+  },
+  {
+    ja3_hash: "",
+    fingerprint: "t13d1517h2_8daaf6152771_02713d6af862",
+    count: 4521,
+    avg_threat_score: 18,
+    label: "Firefox (Linux)",
+    fingerprint_kind: "ja4",
+    ja4_fingerprint: "t13d1517h2_8daaf6152771_02713d6af862",
+  },
+  {
+    ja3_hash: "",
+    fingerprint: "t13d3918h2_cd85d2e88a5b_5e1c7c16e5e5",
+    count: 2341,
     avg_threat_score: 8,
-    label: "Chrome 120+ (Windows)",
+    label: "Safari (iOS)",
+    fingerprint_kind: "ja4",
+    ja4_fingerprint: "t13d3918h2_cd85d2e88a5b_5e1c7c16e5e5",
   },
   {
-    ja3_hash: "cd08e31494816f6cdb10e65e4d1a37e7",
-    fingerprint: "771,4865-4866-4867-49195,0-23-65281-10-11-35-16-5-13-18-51-45-43-27-17513,29-23-24,0",
-    count: 3102,
-    avg_threat_score: 6,
-    label: "Firefox 121+ (Linux)",
-  },
-  {
-    ja3_hash: "3b5074b1b5d032e5620f69f9f700ff0e",
-    fingerprint: "771,4865-4866-4867,0-23-65281-10-11-35-16-5-51-45-43-27,29-23-24,0",
-    count: 2847,
-    avg_threat_score: 5,
-    label: "Safari 17+ (macOS)",
-  },
-  {
-    ja3_hash: "1138de370e523e824fc6c60be11e0e5f",
-    fingerprint: "771,4865-4866-4867-49195-49199,0-23-65281-10-11-35-16-5-13-18-51-45,29-23-24,0",
+    ja3_hash: "",
+    fingerprint: "t13d1516h2_8daaf6152771_e5627efa2ab1",
     count: 1956,
-    avg_threat_score: 4,
-    label: "Edge 120+ (Windows)",
+    avg_threat_score: 11,
+    label: "Edge (Windows)",
+    fingerprint_kind: "ja4",
+    ja4_fingerprint: "t13d1516h2_8daaf6152771_e5627efa2ab1",
   },
   {
-    ja3_hash: "f09e72ab64bb747b8a5bb4c0f2e3816d",
-    fingerprint: "771,49195-49199-49196-49200,0-65281-10-11-35-16-5-13,23-24-25,0",
+    ja3_hash: "",
+    fingerprint: "t13d1517h2_000000000000_b0da82dd1658",
     count: 412,
     avg_threat_score: 92,
     label: "Cobalt Strike Beacon",
+    fingerprint_kind: "ja4",
+    ja4_fingerprint: "t13d1517h2_000000000000_b0da82dd1658",
   },
   {
-    ja3_hash: "a0e9f5d64349fb13191bc781f81f42e1",
-    fingerprint: "771,4865-4867-4866,0-23-65281-10-11-35-16-5-13-51-45-43-27,29-23-24,0",
+    ja3_hash: "",
+    fingerprint: "t13i0900h2_55b375ea5a37_9e7b989ebec8",
     count: 287,
     avg_threat_score: 88,
-    label: "Metasploit Client",
+    label: "Mimikatz",
+    fingerprint_kind: "ja4",
+    ja4_fingerprint: "t13i0900h2_55b375ea5a37_9e7b989ebec8",
   },
   {
-    ja3_hash: "b32309a26951912be7dba376398abc3b",
-    fingerprint: "771,49196-49200-159-52393-52392,0-23-65281-10-11-35-16-5-13-18-51-45-43,29-23-24,0",
+    ja3_hash: "",
+    fingerprint: "t13d1517h2_8daaf6152771_02713d6af862",
     count: 198,
-    avg_threat_score: 45,
+    avg_threat_score: 22,
     label: "Python requests 2.x",
+    fingerprint_kind: "ja4",
+    ja4_fingerprint: "t13d1517h2_8daaf6152771_02713d6af862",
   },
   {
-    ja3_hash: "6734f37431670b3ab4292b8f60f29984",
-    fingerprint: "771,49195-52393-52392,0-23-65281-10-11-35-16-5-13-18-51-45-43-27,29-23,0",
+    ja3_hash: "",
+    fingerprint: "t13d1516h2_8daaf6152771_e5627efa2ab1",
     count: 156,
-    avg_threat_score: 63,
+    avg_threat_score: 15,
     label: "curl/7.x",
+    fingerprint_kind: "ja4",
+    ja4_fingerprint: "t13d1516h2_8daaf6152771_e5627efa2ab1",
   },
   {
-    ja3_hash: "de350869b8c85de67a350c8d186f11e6",
-    fingerprint: "771,49196-49200-159,0-23-65281-10-11-35-16-5-13-51-45-43,23-24,0",
+    ja3_hash: "",
+    fingerprint: "t13d1517h2_8daaf6152771_b0da82dd1658",
     count: 134,
-    avg_threat_score: 78,
+    avg_threat_score: 65,
     label: "Trickbot C2 Client",
+    fingerprint_kind: "ja4",
+    ja4_fingerprint: "t13d1517h2_8daaf6152771_b0da82dd1658",
   },
   {
-    ja3_hash: "c35a2f4b71f7b5b47ec3e2b8f8f33baa",
-    fingerprint: "771,4865-4867,0-23-65281-10-11-35-16-5-13-18-51-45-43-27-17513,29-23-24,0",
+    ja3_hash: "",
+    fingerprint: "t13d1516h2_8daaf6152771_e5627efa2ab1",
     count: 89,
-    avg_threat_score: 34,
+    avg_threat_score: 14,
     label: "Node.js https module",
+    fingerprint_kind: "ja4",
+    ja4_fingerprint: "t13d1516h2_8daaf6152771_e5627efa2ab1",
   },
 ];
 
 export async function GET() {
-  return NextResponse.json(topCommon);
+  return NextResponse.json(topCommon, { headers: corsHeaders });
 }
