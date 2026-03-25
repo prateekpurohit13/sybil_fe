@@ -1,9 +1,19 @@
 import { NextResponse } from "next/server";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204, headers: corsHeaders });
+}
+
 // Generate 24 hours of dummy time-series data
 function generateTimeseries() {
   const data = [];
-  const now = new Date("2026-02-08T15:00:00Z");
+  const now = new Date();
 
   for (let i = 23; i >= 0; i--) {
     const time = new Date(now.getTime() - i * 60 * 60 * 1000);
@@ -33,5 +43,5 @@ function generateTimeseries() {
 }
 
 export async function GET() {
-  return NextResponse.json(generateTimeseries());
+  return NextResponse.json(generateTimeseries(), { headers: corsHeaders });
 }
