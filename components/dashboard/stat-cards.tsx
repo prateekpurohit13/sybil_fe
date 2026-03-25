@@ -3,9 +3,8 @@
 import useSWR from "swr";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, ShieldAlert, ShieldQuestion, Activity } from "lucide-react";
+import { fetcher } from "@/lib/api";
 import type { TotalStats } from "@/lib/types";
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export function StatCards() {
   const { data, isLoading } = useSWR<TotalStats>("/api/stats/total", fetcher, {

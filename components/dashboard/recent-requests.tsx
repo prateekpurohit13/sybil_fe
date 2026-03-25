@@ -17,9 +17,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ThreatBadge } from "@/components/dashboard/threat-badge";
+import { fetcher } from "@/lib/api";
 import type { TLSRequest } from "@/lib/types";
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 function formatTime(timestamp: string) {
   return new Date(timestamp).toLocaleTimeString("en-US", {

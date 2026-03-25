@@ -21,9 +21,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { fetcher } from "@/lib/api";
 import type { TimeseriesEntry } from "@/lib/types";
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 const chartConfig = {
   clean: {

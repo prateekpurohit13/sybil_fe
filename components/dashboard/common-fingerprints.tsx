@@ -17,9 +17,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Progress } from "@/components/ui/progress";
+import { fetcher } from "@/lib/api";
 import type { FingerprintEntry } from "@/lib/types";
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export function CommonFingerprints() {
   const { data, isLoading } = useSWR<FingerprintEntry[]>(
