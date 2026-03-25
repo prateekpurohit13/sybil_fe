@@ -24,7 +24,18 @@ export async function GET() {
   }
 }
 
-export const POST = methodNotAllowedResponse;
-export const PUT = methodNotAllowedResponse;
-export const PATCH = methodNotAllowedResponse;
-export const DELETE = methodNotAllowedResponse;
+export async function POST() {
+  return methodNotAllowedResponse();
+}
+
+export async function PUT() {
+  return methodNotAllowedResponse();
+}
+
+export async function PATCH() {
+  return methodNotAllowedResponse();
+}
+
+export async function DELETE() {
+  return methodNotAllowedResponse();
+}

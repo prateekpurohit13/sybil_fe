@@ -39,4 +39,3 @@ export function handleApiError(error: unknown) {
 
   return errorResponse("internal server error", 500);
 }
-
