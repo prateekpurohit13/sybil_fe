@@ -1,23 +1,30 @@
-import { NextResponse } from "next/server";
+import {
+  handleApiError,
+  jsonResponse,
+  methodNotAllowedResponse,
+  optionsResponse,
+} from "@/lib/api-response";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
+const totalStats = {
+  total: 15420,
+  malicious: 234,
+  suspicious: 892,
+  clean: 14294,
 };
 
 export async function OPTIONS() {
-  return new NextResponse(null, { status: 204, headers: corsHeaders });
+  return optionsResponse();
 }
 
 export async function GET() {
-  return NextResponse.json(
-    {
-      total: 15420,
-      malicious: 234,
-      suspicious: 892,
-      clean: 14294,
-    },
-    { headers: corsHeaders }
-  );
+  try {
+    return jsonResponse(totalStats);
+  } catch (error) {
+    return handleApiError(error);
+  }
 }
+
+export const POST = methodNotAllowedResponse;
+export const PUT = methodNotAllowedResponse;
+export const PATCH = methodNotAllowedResponse;
+export const DELETE = methodNotAllowedResponse;

@@ -1,13 +1,12 @@
-import { NextResponse } from "next/server";
-
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
+import {
+  handleApiError,
+  jsonResponse,
+  methodNotAllowedResponse,
+  optionsResponse,
+} from "@/lib/api-response";
 
 export async function OPTIONS() {
-  return new NextResponse(null, { status: 204, headers: corsHeaders });
+  return optionsResponse();
 }
 
 // Generate 24 hours of dummy time-series data
@@ -43,5 +42,14 @@ function generateTimeseries() {
 }
 
 export async function GET() {
-  return NextResponse.json(generateTimeseries(), { headers: corsHeaders });
+  try {
+    return jsonResponse(generateTimeseries());
+  } catch (error) {
+    return handleApiError(error);
+  }
 }
+
+export const POST = methodNotAllowedResponse;
+export const PUT = methodNotAllowedResponse;
+export const PATCH = methodNotAllowedResponse;
+export const DELETE = methodNotAllowedResponse;
