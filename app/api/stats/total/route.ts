@@ -1,23 +1,14 @@
-import { NextResponse } from "next/server";
+import { errorResponse, fetchFromEnv, optionsResponse, successResponse } from "@/lib/server-api";
+import type { TotalStats } from "@/lib/types";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
-
-export async function OPTIONS() {
-  return new NextResponse(null, { status: 204, headers: corsHeaders });
-}
+export { optionsResponse as OPTIONS };
 
 export async function GET() {
-  return NextResponse.json(
-    {
-      total: 15420,
-      malicious: 234,
-      suspicious: 892,
-      clean: 14294,
-    },
-    { headers: corsHeaders }
-  );
+  try {
+    const stats = await fetchFromEnv<TotalStats>("API_TOTAL_STATS_URL");
+    return successResponse(stats);
+  } catch (error) {
+    console.error("Error fetching total stats", error);
+    return errorResponse(error, "API_TOTAL_STATS_URL");
+  }
 }

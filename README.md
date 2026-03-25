@@ -34,3 +34,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Environment Variables
+
+The API routes proxy to backend endpoints that supply live data. Configure these server-side variables with the corresponding URLs:
+
+- `API_TOTAL_STATS_URL`
+- `API_TIMESERIES_URL`
+- `API_RECENT_REQUESTS_URL`
+- `API_TOP_THREATS_URL`
+- `API_TOP_FINGERPRINTS_URL`
+
+Each endpoint should return JSON matching the shapes defined in `lib/types.ts` (for totals, time-series, TLS requests, and fingerprint entries).
